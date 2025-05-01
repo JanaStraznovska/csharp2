@@ -1,7 +1,4 @@
-﻿using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-
-namespace UkolLucisnik;
+﻿namespace UkolLucisnik;
 
 class Program
 {
@@ -20,7 +17,7 @@ class Program
             int coMaLucistnikDelat;
             bool spravnaHodnota = int.TryParse(hodnotaCoZadalUzivatel, out coMaLucistnikDelat);
 
-            if (spravnaHodnota = false)
+            if (spravnaHodnota == false)
             {
                 Console.WriteLine($"Nezadal jsi cislo, zadej hodnotu znovu.");
             }
@@ -32,8 +29,8 @@ class Program
                         Pepa.Vystrel();
                         break;
                     case 2:
-                        int pocetPridavanychSipu = NactiCeleCisloZKonzole("Zadej pocet sipu");
-                        
+                        int pocetPridavanychSipu = NactiPrirozeneCisloZKonzole("Zadej pocet sipu");
+
                         Pepa.PrijedSipy(pocetPridavanychSipu);
                         break;
                     case 3:
@@ -42,18 +39,12 @@ class Program
                         Console.WriteLine("Nezadal jsi platnou volbu.");
                         break;
                 }
-
             }
-
-
         }
-
     }
 
-    public static int NactiCeleCisloZKonzole(string vyzva)
+    public static int NactiPrirozeneCisloZKonzole(string vyzva)
     {
-
-
         while (true)
         {
             Console.WriteLine(vyzva);
