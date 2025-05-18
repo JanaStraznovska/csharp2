@@ -50,7 +50,7 @@ namespace knihovna
             }
         }
 
-        public DateTime PublishDate
+        public DateTime PublishedDate
         {
             get
             {
@@ -62,19 +62,17 @@ namespace knihovna
             }
         }
 
-
-
         public Book(string title, string author, DateTime publishedDate, int pages)
         {
-            _title = title;
-            _author = author;
-            _publishedDate = publishedDate;
-            _pages = pages;
+            Title = title;
+            Author = author;
+            PublishedDate = publishedDate;
+            Pages = pages;
         }
 
         public void Print()
         {
-            Console.WriteLine($"Book: {Title}, Author {Author}, Published: {PublishDate:d.M.yyyy}, Pages: {Pages}");
+            Console.WriteLine($"Book: {Title}, Author {Author}, Published: {PublishedDate:d.M.yyyy}, Pages: {Pages}");
         }
 
     }

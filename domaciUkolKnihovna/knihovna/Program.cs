@@ -30,6 +30,7 @@ class Program
         ProcessData("ADD;Harry Potter and the philosophers stone;J.K.Rowling;1997-06-26;285");
         ProcessData("LIST");
         ProcessData("STATS");
+        ProcessData("FIND;ORW");
         ProcessData("FIND;harry");
         ProcessData("FIND;test");
         ProcessData("FIND;");
@@ -64,10 +65,25 @@ class Program
                 {
                     string pagesInput = parts[4];
                     bool pagesFromConsoleParseSuccess = int.TryParse(pagesInput, out int pagesFromConsole);
-                    Book newEvent = new Book(parts[1], parts[2], dateInput, pagesFromConsole);
+                    if (pagesFromConsoleParseSuccess)
+                    {
+                        try
+                        {
+                            Book newEvent = new Book(parts[1], parts[2], dateInput, pagesFromConsole);
 
-                    listOfBooks.Add(newEvent);
+                            listOfBooks.Add(newEvent);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid pages!");
+                    }
                 }
+
                 else
                 {
                     Console.WriteLine("Invalid date!");
@@ -82,7 +98,7 @@ class Program
 
         else if (inputString.StartsWith("LIST"))
         {
-            var sortedBookList = listOfBooks.OrderBy(b => b.PublishDate);
+            var sortedBookList = listOfBooks.OrderBy(b => b.PublishedDate);
 
             foreach (var book in sortedBookList)
             {
@@ -120,7 +136,9 @@ class Program
                 var keyword = parts[1].ToLower();
                 if (!string.IsNullOrWhiteSpace(keyword))
                 {
-                    var resultsOfSearch = listOfBooks.Where(b => b.Title.ToLower().Contains(keyword));
+                    var resultsOfSearch = listOfBooks.Where(b =>
+                        b.Author.ToLower().Contains(keyword) ||
+                        b.Title.ToLower().Contains(keyword));
 
                     Console.WriteLine($"Search result for '{keyword}'");
 
